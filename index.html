@@ -9,7 +9,9 @@
 <style>
 :root {
     --neon-pink: #ff007f;
+    --neon-purple: #AA00D4;
     --neon-blue: #00d4ff;
+    --neon-black: #ff5c00;   
     --glass: rgba(255, 255, 255, 0.1);
 }
 
@@ -55,6 +57,42 @@ body {
     box-shadow: 0 0 15px var(--neon-blue);
     color: black;
 }
+.btn-maain {
+    width: 100%;
+    padding: 18px;
+    margin: 15px 0;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-maain:hover {
+    background: var(--neon-purple);
+    box-shadow: 0 0 15px var(--neon-purple);
+    color: white;
+}
+.btn-map {
+    width: 100%;
+    padding: 18px;
+    margin: 15px 0;
+    font-size: 1rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-map:hover {
+    background: var(--neon-black);
+    box-shadow: 0 0 15px var(--neon-black);
+    color: white;
+}
 
 h2 {
     text-shadow: 0 0 10px var(--neon-blue);
@@ -72,12 +110,12 @@ h2 {
         مترو یار خط ۳
     </button>
 
-    <button class="btn-main"
+    <button class="btn-maain"
         onclick="window.location.href='https://tm-studio-r.github.io/Subway/'">
         مترو یار خط ۷
     </button>
 
-    <button class="btn-main"
+    <button class="btn-map"
         onclick="window.location.href='https://s8.uupload.ir/files/tehran-subway-map-pdf(1)_vztx.jpg'">
         نقشه مترو تهران
     </button>
