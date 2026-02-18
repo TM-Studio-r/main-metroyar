@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>مترو یار</title>
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <style>
 :root {
@@ -17,9 +16,13 @@
     --glass: rgba(255, 255, 255, 0.1);
 }
 
-body {
+html, body {
+    height: 100%;
     margin: 0;
     font-family: 'Tahoma', sans-serif;
+}
+
+body {
     background: #050505 url('109.png') no-repeat center center fixed;
     background-size: cover;
     color: white;
@@ -27,21 +30,26 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
+/* صفحه اصلی (کنتینر) */
 .container {
     width: 90%;
     max-width: 480px;
     background: var(--glass);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255,255,255,0.2);
     border-radius: 30px;
     padding: 30px;
     box-shadow: 0 0 30px rgba(0,0,0,0.5);
     text-align: center;
+    z-index: 1;
 }
 
-.btn-main {
+/* دکمه‌ها */
+.btn-main, .btn-maain, .btn-map {
     width: 100%;
     padding: 18px;
     margin: 15px 0;
@@ -59,37 +67,11 @@ body {
     box-shadow: 0 0 15px var(--neon-blue);
     color: black;
 }
-.btn-maain {
-    width: 100%;
-    padding: 18px;
-    margin: 15px 0;
-    font-size: 1rem;
-    border-radius: 50px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.08);
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
 .btn-maain:hover {
     background: var(--neon-purple);
     box-shadow: 0 0 15px var(--neon-purple);
     color: white;
 }
-.btn-map {
-    width: 100%;
-    padding: 18px;
-    margin: 15px 0;
-    font-size: 1rem;
-    border-radius: 50px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(255,255,255,0.08);
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
 .btn-map:hover {
     background: var(--neon-orange);
     box-shadow: 0 0 15px var(--neon-orange);
@@ -99,12 +81,98 @@ body {
 h2 {
     text-shadow: 0 0 10px var(--neon-orange);
 }
+
+/* ---------- اولین اجرا — اورلِی تمام صفحه ---------- */
+.first-run-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999; /* بالاتر از بقیه */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* نیمه شفاف برای تیره‌تر کردن پس‌زمینه */
+    background: rgba(0,0,0,0.25);
+    /* اجازه میده محتوای پشت اورلِی با blur تار بشه (بستگی به مرورگر) */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* در برخی مرورگرها اگر بخوایم دقیق همان بک‌گراندِ تصویر را ببینیم ولی تار شده،
+   می‌توانیم یک لایه پس‌زمینه (همان تصویر) اضافه کنیم */
+.first-run-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('109.png') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(10px) brightness(0.6);
+    transform: scale(1.02);
+    z-index: -1;
+}
+
+/* خود پنجره پیام */
+.first-run-modal {
+    max-width: 720px;
+    width: calc(100% - 48px);
+    margin: 0 24px;
+    background: rgba(0,0,0,0.45);
+    border-radius: 18px;
+    padding: 28px;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* متن پیام */
+.first-run-modal p {
+    line-height: 1.7;
+    font-size: 1.05rem;
+    margin: 0 0 20px 0;
+    white-space: pre-line; /* برای حفظ break line */
+}
+
+/* دکمه شروع — مطابق خواسته: رنگ --neon-orange و متن سفید */
+.first-run-start {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 40px;
+    background: var(--neon-orange);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255,92,0,0.25);
+    transition: transform .12s ease, box-shadow .12s ease;
+    text-decoration: none;
+}
+.first-run-start:active { transform: translateY(1px); }
+.first-run-start:focus { outline: 3px solid rgba(255,92,0,0.18); }
+
+/* برای جلوگیری از اسکرول وقتی اورلِی بازه */
+.noscroll {
+    overflow: hidden !important;
+    height: 100%;
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- ---------- اورلئ نمایش پیام اولین اجرا ---------- -->
+<div id="firstRunOverlay" class="first-run-overlay" aria-hidden="true" style="display:none;">
+    <div class="first-run-modal" role="dialog" aria-modal="true" aria-labelledby="firstRunTitle">
+        <h2 id="firstRunTitle" style="margin-top:0; margin-bottom:12px;">هشدار!</h2>
+        <p>
+با سلام خدمت شما مسافر گرامی
+این برنامه از جدول زمان‌بندی مترو تهران و حومه استفاده میکند و باتوجه به ترافیک خطوط، امکان خطا در اعلام زمان وجود دارد
+        </p>
+        <button id="firstRunStart" class="first-run-start">شروع</button>
+    </div>
+</div>
+
+<!-- ---------- محتوای اصلی شما (بدون تغییر) ---------- -->
+<div class="container" id="mainContainer">
     <h2>به مترویار خوش‌آمدید!</h2>
 
     <button class="btn-main"
@@ -118,11 +186,71 @@ h2 {
     </button>
 
     <button class="btn-map"
-        onclick="window.location.href='https://s8.uupload.ir/files/tehran-subway-map-pdf(1)_vztx.jpg'">
+        onclick="window.location.href='https://tm-studio-r.github.io/main-metroyar/map.png'">
         نقشه مترو تهران
     </button>
 
 </div>
+
+<script>
+(function() {
+    const STORAGE_KEY = 'metroyar_first_run_seen_v1';
+    const overlay = document.getElementById('firstRunOverlay');
+    const startBtn = document.getElementById('firstRunStart');
+
+    function showOverlay() {
+        overlay.style.display = 'flex';
+        overlay.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('noscroll');
+        document.body.classList.add('noscroll');
+        // تمرکز روی دکمه شروع
+        startBtn.focus();
+    }
+
+    function hideOverlay(persist=true) {
+        overlay.style.display = 'none';
+        overlay.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('noscroll');
+        document.body.classList.remove('noscroll');
+        if (persist) {
+            try { localStorage.setItem(STORAGE_KEY, '1'); } catch(e) { /* ignore */ }
+        }
+    }
+
+    // اگر قبلاً نشان داده شده نباشد => نمایش بده
+    try {
+        const seen = localStorage.getItem(STORAGE_KEY);
+        if (!seen) {
+            // نمایش با یک تاخیر خیلی کوتاه تا رندر قبلی کامل شود
+            setTimeout(showOverlay, 80);
+        }
+    } catch(e) {
+        // اگر localStorage موجود نبود (مثلاً خصوصی/محدود)، باز هم نشان می‌دهیم
+        setTimeout(showOverlay, 80);
+    }
+
+    // کلیک روی شروع -> ثبت و مخفی
+    startBtn.addEventListener('click', function () {
+        hideOverlay(true);
+    });
+
+    // اگر کاربر کلید ESC زد، هم پنجره بسته شود و ثبت شود
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay.style.display === 'flex') {
+            hideOverlay(true);
+        }
+    });
+
+    // جلوگیری از کلیک روی پس‌زمینه برای بستن (تا فقط با دکمه بسته شود)
+    overlay.addEventListener('click', function (ev) {
+        if (ev.target === overlay) {
+            // اگر خواستید کلیک روی پشت‌زمینه پنجره را ببندد، این خط را آنکامنت کنید:
+            // hideOverlay(true);
+            ev.stopPropagation();
+        }
+    });
+})();
+</script>
 
 </body>
 </html>
